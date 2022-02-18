@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia {% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Primary Card</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">Warning Card</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">Success Card</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">Danger Card</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Area Chart Example
+                </div>
+                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Bar Chart Example
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+           <div class="dataTable-top">
+           <div class="dataTable-dropdown">
+           <label>
+           <select class="dataTable-selector">
+           <option value="5">5</option>
+           <option value="10" selected="">10</option>
+           <option value="15">15</option>
+           }<option value="20">20</option>
+           <option value="25">25</option>
+           </select> entries per page</label>
+        </div>
+        <div class="dataTable-search">
+        <input class="dataTable-input" placeholder="Search..." type="text">
+        </div>
+        </div>
+        <div class="dataTable-container">
+        <table id="datatablesSimple" class="dataTable-table">
+
+        <thead>
+            <tr><th data-sortable="" style="width: 19.5822%;"><a href="#" class="dataTable-sorter">Name</a></th><th data-sortable="" style="width: 28.9817%;"><a href="#" class="dataTable-sorter">Position</a></th><th data-sortable="" style="width: 15.5875%;"><a href="#" class="dataTable-sorter">Office</a></th><th data-sortable="" style="width: 9.16449%;"><a href="#" class="dataTable-sorter">Age</a></th><th data-sortable="" style="width: 15.1958%;"><a href="#" class="dataTable-sorter">Start date</a></th><th data-sortable="" style="width: 11.5144%;"><a href="#" class="dataTable-sorter">Salary</a></th></tr>
+        </thead>
+        
+                                    <tbody>
+                                    <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                
+                                <div class="dataTable-bottom">
+                                    <div class="dataTable-info">Showing 1 to 10 of 57 entries</div>
+                                    <nav class="dataTable-pagination">
+                                        <ul class="dataTable-pagination-list">
+                                            <li class="active"><a href="#" data-page="1">1</a></li>
+                                            <li class=""><a href="#" data-page="2">2</a></li>
+                                            <li class=""><a href="#" data-page="3">3</a></li>
+                                            <li class=""><a href="#" data-page="4">4</a></li>
+                                            <li class=""><a href="#" data-page="5">5</a></li>
+                                            <li class=""><a href="#" data-page="6">6</a></li>
+                                            <li class="pager"><a href="#" data-page="2">›</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

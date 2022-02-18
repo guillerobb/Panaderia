@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Productos {% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Productos</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Productos</li>
+        </ol>
+    <div class="p-1">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'products:product_form' %}">
+                <button class="btn btn-primary me-md-2" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Agregar
+                </button>
+            </a>
+        </div>
+    </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Productos
+            </div>
+            <div class="card-body">
+                <table  class="table table-sm" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if products %}
+
+                            {% for product in products  %}
+                                <tr>
+                                    <td><a href="{% url 'products:product_detail' product.id %}">{{ product.name }}</a></td>
+                                    {% if product.active == True %}
+                                        <td>Activo</td>
+                                    {% else %}
+                                        <td>No Activo</td>
+                                    {% endif %}
+                                    <td>
+                                        <a href="{% url 'products:product_update' product.id %}"><button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-pencil"></i></button></a> 
+                                        <a onclick="open_modal_delete_product('{% url 'products:product_delete' product.id %}')" class="delete" data-toggle="modal"><button  class="btn btn-outline-danger btn-sm" data-mdb-target="#deleteProductModal"><i class="bi bi-trash pe-none"  data-toggle="tooltip"></i></button></a>
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p>No hay productos disponibles</p>
+                        {% endif %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal HTML -->
+    <div  class="modal fade" id="deleteProductModal" role="dialog">
+   
+    </div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+   <script>
+        var $ = jQuery.noConflict();
+        function open_modal_delete_product(url){
+            $('#deleteProductModal').load(url, function(){
+                $(this).modal('show');         
+            });
+        } 
+    </script>    
+{% endblock %}

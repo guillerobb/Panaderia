@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Contacto {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Cliente: {{ customer_detail.business_name }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{% url 'customers:customer_list' %}">Clientes</a></li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            
+        <form action="{% url 'customers:customer_detail' customer_detail.id  %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">					
+                   <p>Nombre: {{ customer_detail.business_name }}</p>
+                   <p>Estado: {{ customer_detail.active }}</p>
+            </div>
+            <!--<div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-info" value="Save">
+            </div> -->
+        </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

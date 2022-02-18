@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Precios {% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Precios</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Precios</li>
+        </ol>
+    <div class="p-1">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'products:product_form' %}">
+                <button class="btn btn-primary me-md-2" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Agregar
+                </button>
+            </a>
+        </div>
+    </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Productos
+            </div>
+            <div class="card-body">
+                <table  class="table table-sm" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Unidad de Medida</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if products %}
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% for form in formset  %}
+                                    {{ form.as_table }}
+                                    <!--
+                                    <tr>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.unit_of_measurement }}</td>
+                                        <td>{{ product.price }}</td>                                  
+                                    </tr>-->
+                                {% endfor %}
+                            </form>
+                        {% else %}
+                            <p>No hay productos disponibles</p>
+                        {% endif %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal HTML -->
+    <div  class="modal fade" id="deleteProductModal" role="dialog">
+   
+    </div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+   <script>
+        var $ = jQuery.noConflict();
+        function open_modal_delete_product(url){
+            $('#deleteProductModal').load(url, function(){
+                $(this).modal('show');         
+            });
+        } 
+    </script>    
+{% endblock %}

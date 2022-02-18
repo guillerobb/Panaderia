@@ -1,0 +1,21 @@
+<div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <form action="{% url 'customers:contact_delete' contact.id %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-header">						
+                <h4 class="modal-title">Eliminar Contacto</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">					
+                <p>¿Está seguro de que de sea eliminar este contacto?</p>
+                <p class="text-warning"><small>Esta acción no puede revertirse</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-danger" value="Delete">
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

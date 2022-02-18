@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Usuario {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Usuario: {{ object.username }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{% url 'accounts:users_list' %}">Usuarios</a></li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            
+        <form action="{% url 'accounts:user_update' object.id %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+               <div class="input-group mb-3">
+                    <div class="col-sm-3">
+                        <label for="firstName" class="form-label">Nombre</label>	
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="lastName" class="form-label">Apellido</label>	
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="col-sm-3">
+                        <label for="username" class="form-label">Usuario</label>	
+                        {{ form.username }}
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="email" class="form-label">Email</label>	
+                        {{ form.email }}
+                    </div>
+                </div>
+               <div class="input-group mb-3">
+                    <div class="col-sm-6">
+                        <label for="isActive" class="form-label">Activo?</label>	
+                        {{ form.is_active }}
+                    </div>   
+                </div>
+            </div>
+        
+            <div class="modal-footer">
+                <a href="{{ view.get_success_url }}" class="btn btn-secondary">Cancel</a>
+                <input type="submit" class="btn btn-info" value="Save">
+            </div>
+        </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Clientes {% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Cliente: {{ customer.business_name }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'customers:customer_list' %}">Clientes</a></li>
+        </ol>
+        <div class="p-1">
+        
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'customers:contact_add_form' customer.id %}">
+                    <button class="btn btn-primary me-md-2" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                        </svg>
+                        Agregar
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Contactos
+            </div>
+            <div class="card-body">
+                <table  class="table table-sm" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Estado</th>
+                            <th>Teléfono</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if customer.get_contacts %}
+
+                            {% for contact in customer.get_contacts %}
+                                <tr>
+                                    <td>{{ contact.first_name }}</td>
+                                    <td>{{ contact.last_name }}</td>
+                                    {% if contact.active == True %}
+                                        <td>Activo</td>
+                                    {% else %}
+                                        <td>No Activo</td>
+                                    {% endif %}
+                                    <td>{{ contact.phone }}</td>
+                                    <td>
+                                        <a href="{% url 'customers:contact_update' contact.id %}"><button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-pencil"></i></button></a> 
+                                        <a onclick="open_modal_delete_contact('{% url 'customers:contact_delete' contact.id %}')" class="delete" data-toggle="modal"><button  class="btn btn-outline-danger btn-sm" data-mdb-target="#deleteCustomerModal"><i class="bi bi-trash pe-none"  data-toggle="tooltip"></i></button></a>
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p>No hay contactos disponibles</p>
+                        {% endif %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal HTML -->
+    <div  class="modal fade" id="deleteContactModal" role="dialog">
+   
+    </div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+   <script>
+        var $ = jQuery.noConflict();
+        function open_modal_delete_contact(url){
+            $('#deleteContactModal').load(url, function(){
+                $(this).modal('show');         
+            });
+        } 
+    </script>    
+{% endblock %}

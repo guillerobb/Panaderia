@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title-head %} Panaderia - Producto {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Producto: {{ product.name }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'customers:index' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{% url 'products:product_list' %}">Productos</a></li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <form action="{% url 'products:product_detail' product.id %}" method="POST">
+                <div class="modal-body">					
+                    <p>Nombre: {{ product.name }}</p>
+                    <p>Unidad de Medida: {{ product.unit_of_measurement }}</p>
+                    <p>Estado: {{ product.active }}</p>
+                    <p>Precio: {{ product.price }}</p>
+                    <p>Es pan?: {{ product.is_bread }}</p>
+                    <p>Controla Stock: {{ product.control_stock }}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
